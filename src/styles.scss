@@ -1,5 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+// Required
+//@import "../node_modules/bootstrap/scss/functions";
 
-/* Importing Bootstrap SCSS file. */
+$body-bg: #f8f9fa; // gray-100
+$body-bg-dark: #212529; // gray-900
+
+// The mavbar-bg var doesn't exists in bs5.2
+$navbar-bg: #b2b2b2; // firebreak
+$navbar-bg-dark: #b22222; // firebreak
+
+/*
+// Create your own map
+$custom-colors: (
+    'custom-red': #ff00bb,
+    'custom-green': #00ff00,
+    'custom-blue': #0000ff,
+);
+$utilities: () !default;
+$utilities: map-merge($utilities,
+        ("background-color": (property: background-color,
+                class: bg,
+                values: $custom-colors )));
+*/
+
+/*
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+
+$custom-colors: (
+    "custom-color1": #900,
+    "custom-color2": #900
+);
+
+// Merge the maps
+$theme-colors: map-merge($theme-colors, $custom-colors);
+*/
+
 @import 'bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-icons/font/bootstrap-icons.css';
+
+//$navbar-bg: $gray-200;
+
+.navbar {
+    background-color: $navbar-bg; //$gray-100;
+    // --bs-navbar-custom: 3;
+    // --bs-navbar-padding-x: 0;
+}
+
+@include color-mode(dark) {
+    .navbar {
+        background-color: $navbar-bg-dark; //$gray-100;
+    }
+}

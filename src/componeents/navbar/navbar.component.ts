@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'login',
+  selector: 'navbar',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './login.component.html',
+  templateUrl: './navbar.component.html',
   styles: [
   ]
 })
-export class LoginComponent {
+export class NavbarComponent {
 
 }
