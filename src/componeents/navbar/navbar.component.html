@@ -28,16 +28,21 @@
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li>
             </ul>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown button
+            <div ngbDropdown class="d-inline-block">
+                <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+                    Toggle dropdown
                 </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem>Action - 1</button>
+                    <button ngbDropdownItem>Another Action</button>
+                    <button ngbDropdownItem>Something else is here</button>
+                </div>
             </div>
+            <span class="input-group-text" type="button" (click)="toggleTheme()">
+                <img src="assets/svg/{{themeState.svg[themeState.state]}}.svg"
+                    alt="{{themeState.alt[themeState.state]}}"
+                    title="{{themeState.title[themeState.state]}}" />
+            </span>
             <!-- <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
