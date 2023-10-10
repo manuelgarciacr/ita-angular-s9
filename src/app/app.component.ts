@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from "../componeents/navbar/navbar.component";
+import { NavbarComponent } from "../infrastructure/components/navbar/navbar.component";
 //import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({

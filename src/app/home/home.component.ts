@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from "../../componeents/navbar/navbar.component";
+import { NavbarComponent } from "src/infrastructure/components/navbar/navbar.component";
 
 @Component({
     standalone: true,

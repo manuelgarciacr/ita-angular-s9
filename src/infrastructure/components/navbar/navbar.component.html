@@ -1,0 +1,102 @@
+<nav class="navbar fixed-top navbar-expand-sm">
+    <div class="container-fluid">
+        <button
+            class="navbar-toggler"
+            (click)="isMenuCollapsed = !isMenuCollapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">Navbar</a>
+        <div
+            class="collapse navbar-collapse"
+            [ngbCollapse]="isMenuCollapsed"
+            id="navbarTogglerDemo03"
+        >
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a
+                        class="nav-link active"
+                        (click)="isMenuCollapsed = true"
+                        aria-current="page"
+                        href="#"
+                        >{{ "NAVBAR.Home" | translate }}</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        (click)="isMenuCollapsed = true"
+                        href="#"
+                        >{{ "NAVBAR.Broom" | translate }}</a
+                    >
+                </li>
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Link
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </li> -->
+            </ul>
+            <div ngbDropdown class="d-inline-block">
+                <button
+                    type="button"
+class="input-group-text"
+                    (click)="isMenuCollapsed = true"
+                    id="dropdownBasic1"
+                    ngbDropdownToggle
+                >
+                    Toggle dropdown
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem>Action - 1</button>
+                    <button ngbDropdownItem>Another Action</button>
+                    <button ngbDropdownItem>Something else is here</button>
+                </div>
+            </div>
+            <span
+                class="input-group-text ms-2"
+                type="button"
+                (click)="toggleLang(); isMenuCollapsed = true"
+            >
+                <img
+                    src="assets/svg/{{ langState.svg[langState.state] }}.svg"
+                    alt="{{ langState.alt[langState.state] }}"
+                    title="{{ langState.title[langState.state] }}"
+                    width="32"
+                    height="24"
+                />
+            </span>
+            <span
+                class="input-group-text ms-2"
+                type="button"
+                (click)="toggleTheme(); isMenuCollapsed = true"
+            >
+                <img
+                    src="assets/svg/{{ themeState.svg[themeState.state] }}.svg"
+                    alt="{{ themeState.alt[themeState.state] }}"
+                    title="{{ themeState.title[themeState.state] }}"
+                    width="32"
+                    height="24"
+                />
+            </span>
+            <!-- <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form> -->
+        </div>
+    </div>
+</nav>

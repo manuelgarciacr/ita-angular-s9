@@ -2,11 +2,14 @@
 // Required
 //@import "../node_modules/bootstrap/scss/functions";
 
-$body-bg: #f8f9fa; // gray-100
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+
+$body-bg: $gray-100;
 $body-bg-dark: #0B2447;
 
 // The mavbar-bg var doesn't exists in bs5.2
-$navbar-bg: #b2b2b2;
+$navbar-bg: $gray-200;
 $navbar-bg-dark: #19376D;
 
 /*
