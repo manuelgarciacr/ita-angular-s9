@@ -1,43 +1,32 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ConfigurationService {
     private renderer: Renderer2;
+
     private _theme = 'light';
     get theme() {
         return this._theme;
     }
-    // private locales = ['en', 'es'];
-    // private _locale = 'en-US';
-    // get locale() {
-    //     return this._locale;
-    // }
 
-    constructor(
-        // @Inject(LOCALE_ID) locale: string,
-        rendererFactory: RendererFactory2
-    ) {
-        this.renderer = rendererFactory.createRenderer(null, null);
-        this._setTheme('light');
+    private locales = ['en', 'es'];
+    private _locale = 'en'; // Default
+    get locale() {
+        return this._locale;
     }
 
-    // private _setLocale = () => {
-    //     const lang = navigator.languages;
-    //     this._locale =
-    //         lang.find(
-    //             (lang) => this.locales.find((loc) => loc == lang) != undefined
-    //         ) || this._locale;
-    //     this.renderer.setAttribute(
-    //         document.querySelector('html'),
-    //         'lang',
-    //         'tr'
-    //     );
-    // };
+    constructor(rendererFactory: RendererFactory2, private translate: TranslateService) {
+        this.renderer = rendererFactory.createRenderer(null, null);
+        this._setTheme('light');
+        this._setLocale()
+    }
 
     private _setTheme(theme: string) {
         this._theme = theme;
+
         this.renderer.setAttribute(
             document.querySelector('html'),
             'data-bs-theme',
@@ -50,5 +39,36 @@ export class ConfigurationService {
         else this._setTheme('light');
 
         return this.theme;
+    }
+
+    private _setLocale = (locale?: string) => {
+
+
+        if (locale == undefined) {
+            const lang = navigator.languages;
+
+            this.translate.setDefaultLang('en');
+
+            locale = lang.find(
+                (lang) => this.locales.find((loc) => loc == lang) != undefined
+            ) || this.translate.getDefaultLang();
+        }
+
+        this._locale = locale;
+
+        this.renderer.setAttribute(
+            document.querySelector('html'),
+            'lang',
+            locale
+        );
+console.log("SL", locale)
+        this.translate.use(locale);
+    };
+
+    toggleLocale() {
+        if (this.locale == 'en') this._setLocale('es');
+        else this._setLocale('en');
+
+        return this.locale;
     }
 }

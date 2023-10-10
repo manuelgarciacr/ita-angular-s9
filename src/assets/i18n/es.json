@@ -1,5 +1,9 @@
 {
-    "HOME": {
-        "HELLO": "hola {{value}}"
+    "NAVBAR": {
+        "Home": "Inicio",
+        "Broom": "Escoba",
+        "Log in": "Iniciar sesión",
+        "Sign up": "Registrarse",
+        "Log out": "Cerrar sesión"
     }
 }

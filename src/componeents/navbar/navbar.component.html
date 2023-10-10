@@ -8,12 +8,12 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="#">{{"NAVBAR.Home" | translate}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="#">{{"NAVBAR.Broom" | translate}}</a>
                 </li>
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Link
                     </a>
@@ -26,7 +26,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                </li>
+                </li> -->
             </ul>
             <div ngbDropdown class="d-inline-block">
                 <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
@@ -38,10 +38,17 @@
                     <button ngbDropdownItem>Something else is here</button>
                 </div>
             </div>
-            <span class="input-group-text" type="button" (click)="toggleTheme()">
+            <span class="input-group-text ms-2" type="button" (click)="toggleLang()">
+                <img src="assets/svg/{{langState.svg[langState.state]}}.svg"
+                    alt="{{langState.alt[langState.state]}}"
+                    title="{{langState.title[langState.state]}}"
+                    width="32" height="24" />
+            </span>
+            <span class="input-group-text ms-2" type="button" (click)="toggleTheme()">
                 <img src="assets/svg/{{themeState.svg[themeState.state]}}.svg"
                     alt="{{themeState.alt[themeState.state]}}"
-                    title="{{themeState.title[themeState.state]}}" />
+                    title="{{themeState.title[themeState.state]}}"
+                    width="32" height="24" />
             </span>
             <!-- <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
