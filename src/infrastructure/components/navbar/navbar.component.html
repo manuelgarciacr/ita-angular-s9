@@ -19,21 +19,15 @@
             id="navbarTogglerDemo03"
         >
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a
-                        class="nav-link active"
-                        (click)="isMenuCollapsed = true"
-                        aria-current="page"
-                        href="#"
-                        >{{ "NAVBAR.Home" | translate }}</a
-                    >
-                </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngFor="let path of paths">
                     <a
                         class="nav-link"
                         (click)="isMenuCollapsed = true"
-                        href="#"
-                        >{{ "NAVBAR.Broom" | translate }}</a
+                        aria-current="page"
+                        [routerLink]="path.path"
+                        routerLinkActive="active"
+                        translate
+                        >ROUTES.{{path.data?.["trn"]}}</a
                     >
                 </li>
                 <!-- <li class="nav-item dropdown">
@@ -54,20 +48,21 @@
             <div ngbDropdown class="d-inline-block">
                 <button
                     type="button"
-class="input-group-text"
+                    class="input-group-text"
                     (click)="isMenuCollapsed = true"
                     id="dropdownBasic1"
                     ngbDropdownToggle
+                    translate
                 >
-                    Toggle dropdown
+                    NAVBAR.LogIn
                 </button>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                     <button ngbDropdownItem>Action - 1</button>
                     <button ngbDropdownItem>Another Action</button>
                     <button ngbDropdownItem>Something else is here</button>
-                </div>
+                </div> -->
             </div>
-            <span
+            <!-- <span
                 class="input-group-text ms-2"
                 type="button"
                 (click)="toggleLang(); isMenuCollapsed = true"
@@ -79,8 +74,9 @@ class="input-group-text"
                     width="32"
                     height="24"
                 />
-            </span>
-            <span
+            </span> -->
+            <toggle-lang (collapseNavbar)="isMenuCollapsed = true"></toggle-lang>
+            <!-- <span
                 class="input-group-text ms-2"
                 type="button"
                 (click)="toggleTheme(); isMenuCollapsed = true"
@@ -92,7 +88,8 @@ class="input-group-text"
                     width="32"
                     height="24"
                 />
-            </span>
+            </span> -->
+            <toggle-theme (collapseNavbar)="isMenuCollapsed = true"></toggle-theme>
             <!-- <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>

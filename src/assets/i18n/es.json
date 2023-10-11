@@ -1,9 +1,11 @@
 {
     "NAVBAR": {
+        "LogIn": "Iniciar sesión",
+        "LogOut": "Desconectar",
+        "SignUp": "Registrarse"
+    },
+    "ROUTES": {
         "Home": "Inicio",
-        "Broom": "Escoba",
-        "Log in": "Iniciar sesión",
-        "Sign up": "Registrarse",
-        "Log out": "Cerrar sesión"
+        "Broom": "Escoba"
     }
 }

@@ -1,9 +1,11 @@
 {
     "NAVBAR": {
+        "LogIn": "Log in",
+        "LogOut": "Log out",
+        "SignUp": "Sign up"
+    },
+    "ROUTES": {
         "Home": "Home",
-        "Broom": "Broom",
-        "Log in": "Log in",
-        "Sign up": "Sign up",
-        "Log out": "Log out"
+        "Broom": "Broom"
     }
 }
