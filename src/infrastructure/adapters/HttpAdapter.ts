@@ -4,7 +4,6 @@ import {
     HttpClient,
     HttpErrorResponse,
     HttpHeaders,
-    HttpResponse,
 } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 // const get = async <T>(url: string) => {
@@ -16,7 +15,7 @@ const httpOptions = {
         "Content-Type": "application/json",
         //Authorization: 'my-auth-token',
     }),
-    observe: "response" as const, // 'body' | 'events' | 'response',
+    observe: "body" as const, // 'body' | 'events' | 'response',
     params: {},
     reportProgress: false,
     responseType: "json" as const,
@@ -32,13 +31,16 @@ export class HttpAdapter implements IDataAdapter {
     get = <T>(url: string): Observable<resp<T>> => {
         return this.http.get<T>(url, httpOptions).pipe(
             //TODO: map(resp) runs only if no errors ?????
-            map(response => {
-                console.log("MAP")
-                return response; // kind of useless
+            map(res => {
+                console.log("MAP", res)
+                const res2: resp<T> = {
+                    status: 3, //res.status,
+                    message: "", data: []}
+                return res2; // kind of useless
             }),
             //TODO: Only must retry on error!=404
             retry({ count: 2, delay: this.shouldRetry }),
-            catchError(this.handleError("http get"))
+            catchError(this.handleError<T>("http get"))
         );
     };
 
@@ -68,17 +70,3 @@ export class HttpAdapter implements IDataAdapter {
         throw error;
     }
 }
-
-const put = async <T>(url: string, data: T) => {
-    return Promise.reject({ status: 500, data: "Internal Server Error" });
-};
-
-
-
-const Adapter: IDataAdapter = {
-    get,
-    put,
-    post
-};
-
-export default Adapter;

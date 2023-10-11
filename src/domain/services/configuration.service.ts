@@ -1,5 +1,6 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpAdapter } from 'src/infrastructure/adapters/HttpAdapter';
 
 @Injectable({
     providedIn: 'root',
@@ -18,10 +19,13 @@ export class ConfigurationService {
         return this._locale;
     }
 
-    constructor(rendererFactory: RendererFactory2, private translate: TranslateService) {
+    constructor(rendererFactory: RendererFactory2, private translate: TranslateService, private httpAdapter: HttpAdapter) {
         this.renderer = rendererFactory.createRenderer(null, null);
         this._setTheme('light');
-        this._setLocale()
+        this._setLocale();
+
+        const resp = httpAdapter.get('https://swapi.py4e.com/api/planets'); // 3
+        resp.subscribe((resp) => console.log(resp));
     }
 
     private _setTheme(theme: string) {
