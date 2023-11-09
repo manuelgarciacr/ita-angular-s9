@@ -1,15 +1,25 @@
 import { Injectable } from '@angular/core';
 import { IUser } from 'src/domain/model/IUser';
-import * as bcrypt from 'bcryptjs';
-import { Subject } from 'rxjs';
+import * as bcrypt from "bcryptjs";
+// eslint-disable-next-line no-var, @typescript-eslint/no-var-requires
 
 @Injectable({
     providedIn: 'root',
 })
 export class UsersService {
-    private user: Subject<IUser | null> = new Subject();
+    //private user = new BehaviorSubject<IUser | null>(null);
+    private user: IUser | null = null;
 
-    constructor() {}
+    constructor() {
+        console.log(bcrypt)
+        // bcrypt.
+        // require.config({
+        //     paths: { bcrypt: "node_modules/bcryptjs/dist/bcrypt.min.js" },
+        // });
+        // require(["bcrypt"], function (bcrypt) {
+        //     bcrypt.hash("perico")
+        // });
+    }
 
     async login(email: string, password: string) {
         const user = this._getUser(email);
@@ -18,10 +28,12 @@ export class UsersService {
 
         return bcrypt
             .compare(password, user.password!)
-            .then((res) => {
+            .then(res => {
                 if (res) {
-                    delete user.password;
-                    this.user.next(user);
+                    // delete user.password;
+                    // this.user.next(user);
+                    user.password = "";
+                    this.user = user;
                 }
                 return res;
             })
@@ -44,17 +56,20 @@ export class UsersService {
                 user.password = hash;
                 usersDB.push(user);
                 this.setDB(usersDB);
-                delete user.password;
-                this.user.next(user);
+                // delete user.password;
+                // this.user.next(user);
+                user.password = "";
+                this.user = user
             })
             .catch((err: unknown) => {
                 console.log(err);
             });
     }
 
-    logout() {
-        this.user.next(null);
-    }
+    // logout() {
+    //     this.user.next(null);
+    // }
+    logout = () => this.user = null;
 
     private _getUser(email: string) {
         const usersDB = this.getDB();
@@ -65,9 +80,15 @@ export class UsersService {
         return user;
     }
 
-    getUser(): Subject<IUser | null> {
-        return this.user;
-    }
+    // getUser(): Subject<IUser | null> {
+    //     return this.user;
+    // }
+    getUser = () => this.user;
+
+    // isLoggedIn() {
+    //     return this.user.getValue() != null;
+    // }
+    isLoggedIn = () => this.user != null;
 
     private getDB(): IUser[] {
         const users = localStorage.getItem('star-wars-db');

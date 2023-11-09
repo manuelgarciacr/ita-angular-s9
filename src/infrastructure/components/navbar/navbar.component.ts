@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import {
     NgbDropdownModule,
     NgbCollapse,
@@ -10,22 +10,38 @@ import { Route, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { routes } from 'src/app/app.routes';
 import { ToggleThemeComponent } from "../toggle-theme/toggle-theme.component";
 import { ToggleLangComponent } from "../toggle-lang/toggle-lang.component";
+import { LoginControlComponent } from "../login-control/login-control.component";
+import { MatIconModule } from "@angular/material/icon";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatTabsModule } from "@angular/material/tabs";
+import { MediaMatcher } from "@angular/cdk/layout";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatListModule } from "@angular/material/list";
 
 @Component({
     selector: "navbar",
     standalone: true,
     templateUrl: "./navbar.component.html",
-    styles: [],
+    styleUrls: ["./navbar.component.scss"],
     imports: [
-        CommonModule,
-        NgbDropdownModule,
-        NgbCollapse,
+        // CommonModule,
+        // NgbDropdownModule,
+        // NgbCollapse,
+        NgFor,
+        NgIf,
         TranslateModule,
         RouterLink,
         RouterLinkActive,
         ToggleThemeComponent,
-        ToggleLangComponent
-    ]
+        ToggleLangComponent,
+        LoginControlComponent,
+        MatTabsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatTabsModule,
+        MatSidenavModule,
+        MatListModule,
+    ],
 })
 export class NavbarComponent implements OnInit {
     protected isMenuCollapsed = true;
@@ -42,16 +58,45 @@ export class NavbarComponent implements OnInit {
     //     state: 0, // 0: English language set, the icon shows the spanish flag.
     // };
     protected paths: Route[] = [];
+    // protected links = routes
+    //     .map(route => route.path)
+    //     .filter(r => r != "" && r != "**"); //["Home", "Map", "Full Calendar", "Graphics"];
+    protected links;
+    protected activeLink;
+    protected isMobile = false;
 
+    // constructor(
+    //     //private conf: ConfigurationService,
+    //     protected translate: TranslateService,
+    //     private router: Router
+    // ) {
+    //     //this.setThemeState(conf.theme);
+    //     //this.setLangState(conf.locale);
+    //     this.paths = routes.filter(v => v.data?.["trn"] != undefined);
+    //     this.links = routes.filter(v => v.data?.["trn"] != undefined);
+    //     this.activeLink = this.links[0];
+    // }
     constructor(
-        //private conf: ConfigurationService,
+        private router: Router,
+        // private _mobileQueryListener: () => void;
         protected translate: TranslateService,
-        private router: Router
+        changeDetectorRef: ChangeDetectorRef,
+        media: MediaMatcher
     ) {
-        //this.setThemeState(conf.theme);
-        //this.setLangState(conf.locale);
         this.paths = routes.filter(v => v.data?.["trn"] != undefined);
+        this.links = routes.filter(v => v.data?.["trn"] != undefined);
+        this.activeLink = this.links[0].path;
+
+        const mobileQuery = media.matchMedia("(max-width: 600px)");
+        mobileQuery.onchange = e => (this.isMobile = e.matches ? true : false);
+
+        //this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+        //this.mobileQuery.addListener(this._mobileQueryListener);
     }
+
+    // ngOnDestroy(): void {
+    //     this.mobileQuery.removeListener(this._mobileQueryListener);
+    // }
 
     ngOnInit(): void {
         noDragging();

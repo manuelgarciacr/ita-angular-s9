@@ -36,6 +36,7 @@ export class ToggleLangComponent {
 
     protected toggleLang() {
         this.setLangState(this.conf.toggleLocale());
+        this.collapseNavbar.emit(true);
     }
 
     private setLangState(lang: string) {

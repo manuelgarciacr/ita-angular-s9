@@ -1,11 +1,13 @@
 {
     "NAVBAR": {
-        "LogIn": "Log in",
         "LogOut": "Log out",
         "SignUp": "Sign up"
     },
     "ROUTES": {
         "Home": "Home",
         "Broom": "Broom"
+    },
+    "LOGIN_CONTROL": {
+        "LogIn": "Log in"
     }
 }

@@ -14,6 +14,41 @@ export const routes: Routes = [
         data: { animation: "isRight", trn: "Broom" },
         //canActivate: [authGuard],
     },
+    {
+        path: "broom1",
+        loadComponent: () =>
+            import("./home/home.component").then(c => c.HomeComponent),
+        data: { animation: "isRight", trn: "Broom" },
+        //canActivate: [authGuard],
+    },
+    {
+        path: "broom2",
+        loadComponent: () =>
+            import("./home/home.component").then(c => c.HomeComponent),
+        data: { animation: "isRight", trn: "Broom" },
+        //canActivate: [authGuard],
+    },
+    {
+        path: "broom3",
+        loadComponent: () =>
+            import("./home/home.component").then(c => c.HomeComponent),
+        data: { animation: "isRight", trn: "Broom" },
+        //canActivate: [authGuard],
+    },
+    {
+        path: "broom4",
+        loadComponent: () =>
+            import("./home/home.component").then(c => c.HomeComponent),
+        data: { animation: "isRight", trn: "Broom" },
+        //canActivate: [authGuard],
+    },
+    {
+        path: "broom5",
+        loadComponent: () =>
+            import("./home/home.component").then(c => c.HomeComponent),
+        data: { animation: "isRight", trn: "Broom" },
+        //canActivate: [authGuard],
+    },
     { path: "", redirectTo: "/home", pathMatch: "full" },
     {
         path: "**",

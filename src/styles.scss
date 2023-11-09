@@ -1,58 +1,102 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use 'sass:map';
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$default-primary: mat.define-palette(mat.$indigo-palette, 500);
+$default-accent: mat.define-palette(mat.$teal-palette);
+
+// The warn palette is optional (defaults to red).
+$default-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$default-theme: mat.define-light-theme((color: (primary: $default-primary,
+                accent: $default-accent,
+                warn: $default-warn,
+            )));
+
+$default-dark-theme: mat.define-dark-theme((color: (primary: $default-primary,
+                accent: $default-accent,
+                warn: $default-warn,
+            ),
+        ));
+
+.darkMode {
+    @include mat.all-component-colors($default-dark-theme);
+}
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($default-theme);
+
 /* You can add global styles to this file, and also import other style files */
 // Required
 //@import "../node_modules/bootstrap/scss/functions";
 
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
+// @import 'bootstrap/scss/functions';
+// @import 'bootstrap/scss/variables';
 
-$body-bg: $gray-100;
-$body-bg-dark: #0B2447;
+// $body-bg: $gray-100;
+// $body-bg-dark: #0B2447;
 
-// The mavbar-bg var doesn't exists in bs5.2
-$navbar-bg: $gray-200;
-$navbar-bg-dark: #19376D;
-
-/*
-// Create your own map
-$custom-colors: (
-    'custom-red': #ff00bb,
-    'custom-green': #00ff00,
-    'custom-blue': #0000ff,
-);
-$utilities: () !default;
-$utilities: map-merge($utilities,
-        ("background-color": (property: background-color,
-                class: bg,
-                values: $custom-colors )));
-*/
-
-/*
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/variables-dark";
-
-$custom-colors: (
-    "custom-color1": #900,
-    "custom-color2": #900
-);
-
-// Merge the maps
-$theme-colors: map-merge($theme-colors, $custom-colors);
-*/
+// // The mavbar-bg var doesn't exists in bs5.2
+// $navbar-bg: $gray-200;
+// $navbar-bg-dark: #19376D;
 
 @import 'bootstrap/scss/bootstrap';
-@import 'node_modules/bootstrap-icons/font/bootstrap-icons.css';
 
 //$navbar-bg: $gray-200;
 
-.navbar {
-    background-color: $navbar-bg; //$gray-100;
-    // --bs-navbar-custom: 3;
-    // --bs-navbar-padding-x: 0;
+// .navbar {
+//     background-color: $navbar-bg; //$gray-100;
+// }
+
+// @include color-mode(dark) {
+//     .navbar {
+//         background-color: $navbar-bg-dark; //$gray-100;
+//     }
+// }
+
+html,
+body {
+    height: 100%;
 }
 
-@include color-mode(dark) {
-    .navbar {
-        background-color: $navbar-bg-dark; //$gray-100;
-    }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+// .navbar-tabnav {
+//     // Get the color config from the theme.
+//     $color-config: mat.get-color-config($default-theme);
+
+//     // Get the primary color palette from the color-config.
+//     $primary-palette: map.get($color-config, 'primary'); // eq: map-get($theme, primary);
+//     a {
+//         &:hover {
+//             background-color: red;
+//         }
+//                 .mat-mdc-tab-header{
+//                     color: green
+//                 }
+//         .mat-mdc-tab-link span.mdc-tab__text-label {
+//             color: mat.get-color-from-palette($primary-palette, 500-contrast);
+//             color: white
+//         }
+//         .mat-mdc-tab-link.mdc-tab--active .mdc-tab__text-label {
+//             color: mat.get-color-from-palette($primary-palette, 500-contrast)
+//         }
+//     }
+// }

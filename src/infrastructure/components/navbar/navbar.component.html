@@ -1,4 +1,52 @@
-<nav class="navbar fixed-top navbar-expand-sm">
+<div class="navbar-container" [class.navbar-is-mobile]="isMobile">
+    <mat-toolbar color="primary" class="navbar-toolbar ">
+        <button mat-icon-button class="example-icon" [style.display]="isMobile ? 'block' : 'none'"
+            aria-label="Menu button"
+            (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="navbar-app-name">DocManager</h1>
+        <span class="example-spacer"></span>
+        <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="navbar-tabnav"
+            [style.display]="isMobile ? 'none' : 'block'"
+            [backgroundColor]="'primary'"
+            [color]="'yellow'">
+            <a mat-tab-link *ngFor="let link of links" (click)="activeLink = link.path"
+                [active]="activeLink == link.path" [routerLink]="link.path" routerLinkActive="active"
+                class="navbar-link text-capitalize">
+                {{link.path}}
+            </a>
+        </nav>
+        <!-- <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel> -->
+
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+            <mat-icon>favorite</mat-icon>
+        </button>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+            <mat-icon>share</mat-icon>
+        </button>
+    </mat-toolbar>
+    <mat-sidenav-container class="navbar-sidenav-container" [style.marginTop.px]="isMobile ? 56 : 0">
+        <mat-sidenav #sidenav [mode]="isMobile ? 'over' : 'side'" [fixedInViewport]="isMobile"
+            fixedTopGap="56">
+            <mat-nav-list>
+                <a mat-list-item routerLink="." class="text-capitalize" *ngFor="let link of links">{{link.path}}</a>
+            </mat-nav-list>
+            <!-- <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+            <a mat-tab-link *ngFor="let link of links" (click)="activeLink = link.path" [active]="activeLink == link.path"
+                [routerLink]="link.path" routerLinkActive="active" class="text-capitalize">
+                {{link.path}}
+            </a>
+        </nav> -->
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+            <!-- <p *ngFor="let content of fillerContent">{{content}}</p> -->
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+<!-- <nav class="navbar fixed-top navbar-expand-sm">
     <div class="container-fluid">
         <button
             class="navbar-toggler"
@@ -30,70 +78,12 @@
                         >ROUTES.{{path.data?.["trn"]}}</a
                     >
                 </li>
-                <!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Link
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                </li> -->
             </ul>
-            <div ngbDropdown class="d-inline-block">
-                <button
-                    type="button"
-                    class="input-group-text"
-                    (click)="isMenuCollapsed = true"
-                    id="dropdownBasic1"
-                    ngbDropdownToggle
-                    translate
-                >
-                    NAVBAR.LogIn
-                </button>
-                <!-- <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button ngbDropdownItem>Action - 1</button>
-                    <button ngbDropdownItem>Another Action</button>
-                    <button ngbDropdownItem>Something else is here</button>
-                </div> -->
-            </div>
-            <!-- <span
-                class="input-group-text ms-2"
-                type="button"
-                (click)="toggleLang(); isMenuCollapsed = true"
-            >
-                <img
-                    src="assets/svg/{{ langState.svg[langState.state] }}.svg"
-                    alt="{{ langState.alt[langState.state] }}"
-                    title="{{ langState.title[langState.state] }}"
-                    width="32"
-                    height="24"
-                />
-            </span> -->
+
+            <login-control></login-control>
             <toggle-lang (collapseNavbar)="isMenuCollapsed = true"></toggle-lang>
-            <!-- <span
-                class="input-group-text ms-2"
-                type="button"
-                (click)="toggleTheme(); isMenuCollapsed = true"
-            >
-                <img
-                    src="assets/svg/{{ themeState.svg[themeState.state] }}.svg"
-                    alt="{{ themeState.alt[themeState.state] }}"
-                    title="{{ themeState.title[themeState.state] }}"
-                    width="32"
-                    height="24"
-                />
-            </span> -->
             <toggle-theme (collapseNavbar)="isMenuCollapsed = true"></toggle-theme>
-            <!-- <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form> -->
+
         </div>
     </div>
-</nav>
+</nav> -->
